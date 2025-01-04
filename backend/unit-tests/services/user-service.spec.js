@@ -17,13 +17,13 @@ const demouser2 = new User('testuser2', 'Jane', 'Doe', 'jad@test.com', 'xyz', fa
 let db;
 
 describe('auth-service unit-tests', function (){
-    before(async function (){
+    beforeAll(async function (){
         db = await initMockedMongoDB();
     });
     afterEach(function (){
         resetMockedMongoDB(db);
     });
-    after(function (){
+    afterAll(function (){
         closeMockedMongoDB(db);
     });
 
