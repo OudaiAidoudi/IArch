@@ -1,0 +1,629 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Swagger HighPerformance - OpenAPI 3.0",
+    "description": "This is a simple HighPerformance API based on the OpenAPI 3.0 specification.",
+    "termsOfService": "http://swagger.io/terms/",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.11"
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "tags": [
+    {
+      "name": "authentification"
+    },
+    {
+      "name": "salesmen"
+    },
+    {
+      "name": "evaluationRecords"
+    },
+    {
+      "name": "bonuses"
+    },
+    {
+      "name": "openCRX"
+    },
+    {
+      "name": "orangeHRM"
+    }
+  ],
+  "servers": [
+    {
+      "url": "/api"
+    },
+    {
+      "url": "/you_touch_you_die/api"
+    }
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "summary": "Login",
+        "tags": [
+          "authentification"
+        ],
+        "requestBody": {
+          "description": "Login Details",
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "username",
+                  "password"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "You are logged in!"
+          },
+          "401": {
+            "description": "Login failed!"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Logout",
+        "tags": [
+          "authentification"
+        ],
+        "responses": {
+          "200": {
+            "description": "You successfully logged out!"
+          },
+          "401": {
+            "description": "You are not logged in!"
+          }
+        }
+      }
+    },
+    "/salesmen/read/all": {
+      "get": {
+        "tags": [
+          "salesmen"
+        ],
+        "summary": "Returns the list of all salesman",
+        "responses": {
+          "200": {
+            "description": "The list of salesman",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SalesMan"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/salesmen/read/firstname/{firstname}": {
+      "get": {
+        "tags": [
+          "salesmen"
+        ],
+        "summary": "returns salesman with firstname",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "firstname",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "First name of salesman"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The salesman",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SalesMan"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/salesmen/read/id/{_id}": {
+      "get": {
+        "tags": [
+          "salesmen"
+        ],
+        "summary": "returns salesman by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "schema": {
+              "type": "number"
+            },
+            "required": true,
+            "description": "id of salesman"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The salesman",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SalesMan"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/salesmen/create": {
+      "post": {
+        "tags": [
+          "salesmen"
+        ],
+        "summary": "Create a salesman",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SalesMan"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The salesman ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "number",
+                  "example": 5
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/salesmen/update/{_id}": {
+      "put": {
+        "tags": [
+          "salesmen"
+        ],
+        "summary": "Update a salesman",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully updated"
+          }
+        }
+      }
+    },
+    "/salesmen/getApiSalesmen": {
+      "get": {
+        "tags":[
+          "salesmen"
+        ],
+        "summary": "Get Salesman from OrangeHRM and add OpenCRx UID",
+        "responses": {
+          "200": {
+            "description": "successfully updated"
+          }
+        }
+      }
+    },
+    "/evaluationRecords/create": {
+      "post": {
+        "tags": [
+          "evaluationRecords"
+        ],
+        "summary": "Create a Evaluation Record",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluationRecord"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The Evaluation Record ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "number",
+                  "example": 2
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/evaluationRecords/read/id/{_id}": {
+      "get": {
+        "tags": [
+          "evaluationRecords"
+        ],
+        "summary": "returns evaluation Record by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "id of evaluationRecord"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The evaluation Record",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationRecord"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/evaluationRecords/read/salesmanId/{salesManID}": {
+      "get": {
+        "tags": [
+          "evaluationRecords"
+        ],
+        "summary": "returns evaluation Records by salesmanID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "salesManID",
+            "schema": {
+              "type": "number"
+            },
+            "required": true,
+            "description": "ID of salesman"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Evaluation Records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"array",
+                  "items":{
+                    "$ref": "#/components/schemas/EvaluationRecord"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/evaluationRecords/read/all": {
+      "get": {
+        "tags": [
+          "evaluationRecords"
+        ],
+        "summary": "returns all EvaluationRecords",
+        "responses": {
+          "200": {
+            "description": "Array of Evaluation Records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"array",
+                  "items":{
+                    "$ref": "#/components/schemas/EvaluationRecord"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/bonuses/read/id/{_id}": {
+      "get": {
+        "tags": [
+          "bonuses"
+        ],
+        "summary": "returns bonus by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "id of bonus"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Bonus",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Bonus"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/bonuses/calculateBonus/sid/{salesManID}/{year}": {
+      "get": {
+        "tags": [
+          "bonuses"
+        ],
+        "summary": "returns bonus of salesman",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "year",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 2020
+            },
+            "description": "Year to be calculated"
+          },
+          {
+            "in": "path",
+            "name": "salesManID",
+            "schema": {
+              "type": "number",
+              "example": 9
+            },
+            "required": true,
+            "description": "ID of salesman"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Bonus"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/employees/read/all": {
+      "get": {
+        "tags": [
+          "orangeHRM"
+        ],
+        "summary": "Returns the list of all employees",
+        "responses": {
+          "200": {
+            "description": "The list of employees",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    }
+  },
+
+
+  "components": {
+    "schemas": {
+      "SalesMan": {
+        "type": "object",
+        "required": [
+          "_id",
+          "uid",
+          "firstname",
+          "lastname",
+          "middleName",
+          "fullName",
+          "unit",
+          "jobTitle"
+        ],
+        "properties": {
+          "_id": {
+            "type": "integer",
+            "description": "id of the salesman"
+          },
+          "uid": {
+            "type": "integer",
+            "description": "uid of the salesman"
+          },
+          "firstname": {
+            "type": "string",
+            "description": "The first name of the salesman"
+          },
+          "lastname": {
+            "type": "string",
+            "description": "The last name of the salesman"
+          },
+          "middleName": {
+            "type": "string",
+            "description": "The middle name of the salesman"
+          },
+          "fullName": {
+            "type": "string",
+            "description": "The full name of the salesman"
+          },
+          "unit": {
+            "type": "string",
+            "description": "The unit of the salesman"
+          },
+          "jobTitle": {
+            "type": "string",
+            "description": "The job title of the salesman"
+          }
+        },
+        "example": {
+          "_id": 5,
+          "firstname": "Max",
+          "lastname": "Mustermann",
+          "middleName": "Muster",
+          "fullName": "Max Mustermann",
+          "unit": "Sales",
+          "jobTitle": "Senior Salesman",
+          "uid": "MAXMUSTERMANNUID"
+        }
+      },
+      "EvaluationRecord": {
+        "type": "object",
+        "required": [
+          "goalDescription",
+          "targetValue",
+          "actualValue",
+          "year",
+          "salesManID"
+        ],
+        "properties": {
+          "goalDescription": {
+            "type": "string",
+            "description": "Description of our goal"
+          },
+          "targetValue": {
+            "type": "integer",
+            "description": "The amount of money we want our salesman to reach this year"
+          },
+          "actualValue": {
+            "type": "string",
+            "description": "The current amount of money our salesman has reached"
+          },
+          "year": {
+            "type": "string",
+            "description": "The year this Evaluation Record is from"
+          },
+          "salesManID": {
+            "type": "integer",
+            "description": "The id of the salesman this record belongs to"
+          }
+        },
+        "example": {
+          "goalDescription": "Make 2000€ of sales this year",
+          "targetValue": 2000,
+          "actualValue": 1520,
+          "year": 2021,
+          "salesManID": 5
+        }
+      },
+      "Bonus": {
+        "type": "object",
+        "required": [
+          "year",
+          "value",
+          "remark",
+          "verified",
+          "salesManID"
+        ],
+        "properties": {
+          "year": {
+            "type": "number",
+            "description": "Year of the bonus"
+          },
+          "value": {
+            "type": "number",
+            "description": "amount of money for this bonus"
+          },
+          "remark": {
+            "type": "string",
+            "description": "remark of CEO"
+          },
+          "verified": {
+            "type": "string",
+            "description": "status of the verification"
+          },
+          "salesManID": {
+            "type": "number",
+            "description": "ID of salesman this bonus belongs to"
+          }
+        },
+        "example": {
+          "year": 2020,
+          "value": 512.5,
+          "remark": "Good one!",
+          "verified": "pending",
+          "salesManID": 9
+        }
+      }
+    }
+  }
+}
