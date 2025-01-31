@@ -8,36 +8,45 @@ exports.Roles = Roles;
 
 exports.roleAuthentification = (roles = [], checkID = false) => {
     return (req, res, next) => {
+        // First check if session and user exist
+        if (!req.session || !req.session.user) {
+            return res.status(401).send("Not authenticated - Please log in");
+        }
+
         // If admin allow everything
         if (req.session.user.isAdmin) {
-            next();
-            return;
+            return next();
         }
 
         const userRole = req.session.user.role;
-        // Stop unauthorized roles from accessing functions        
-        if (!(typeof userRole === 'string' && roles.includes(userRole))) {
-            res.status(401).send("Role " + userRole + " not authorized to use this function.")
-            return;
+
+        // Check if userRole is valid
+        if (!userRole) {
+            return res.status(401).send("User role not found");
         }
 
-        if (userRole === Roles.SALESMAN){
-            // Next function has to check if object belongs to salesman. Not possible to do here.
+        // Stop unauthorized roles from accessing functions
+        if (!(typeof userRole === 'string' && roles.includes(userRole))) {
+            return res.status(401).send("Role " + userRole + " not authorized to use this function.");
+        }
+
+        if (userRole === Roles.SALESMAN) {
+            // Next function has to check if object belongs to salesman
             if (checkID) {
                 req.checkID = true;
-                next();
-                return;
+                return next();
             }
 
-            // Salesman can only do stuff for themselves and no other salesman.
-            if ((req.params._id && req.params._id != req.session.user._id) || (req.params.salesManID && req.params.salesManID != req.session.user._id)) {
-                res.status(401).send("Salesman may only access their own data.")
-                return;
+            // Salesman can only do stuff for themselves
+            const salesmanId = req.session.user._id;
+            const requestedId = req.params._id || req.params.salesManID;
+
+            if (requestedId && requestedId != salesmanId) {
+                return res.status(401).send("Salesman may only access their own data.");
             }
         }
 
-        //This role is allowed to do this
-        next();
-        return;
-    }
-} 
+        // This role is allowed to do this
+        return next();
+    };
+};

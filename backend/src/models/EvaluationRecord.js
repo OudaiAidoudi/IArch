@@ -4,7 +4,7 @@ class EvaluationRecord {
         targetValue,
         actualValue,
         year,
-        salesManID
+        salesManID,
     ) {
         this.goalDescription = goalDescription;
         this.targetValue = targetValue;

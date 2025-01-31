@@ -1,0 +1,55 @@
+/* BonusDetailComponent's private CSS styles */
+:host {
+    display: block;
+    padding: 16px;
+}
+
+label, #bonus-id, #bonus-salesManID {
+    color: var(--primary-color, #435960);
+    font-weight: bold;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+input, textarea {
+    font-size: 1em;
+    padding: 0.5rem;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+button {
+    padding: 1rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[color="primary"] {
+    background-color: var(--primary-color, #435960);
+    color: white;
+}
+
+button[color="primary"]:hover {
+    background-color: var(--primary-dark-color, #2c3e50);
+}
+
+button:disabled {
+    background-color: #eee;
+    color: #ccc;
+    cursor: not-allowed;
+}

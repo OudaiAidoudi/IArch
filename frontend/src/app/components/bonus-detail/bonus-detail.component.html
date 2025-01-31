@@ -1,0 +1,21 @@
+<h2>Bonus Computation Sheet</h2>
+<div class="main-div">
+    <mat-card>
+        <app-salesman></app-salesman>
+    </mat-card>
+    <mat-card>
+        <form *ngIf="bonus">
+            <h2 id="bonus-verified">{{bonus.verified | uppercase}}</h2>
+            <mat-form-field appearance="fill">
+                <mat-label>Bonus value:</mat-label>
+                <input name="value" matInput [(ngModel)]="bonus.value" disabled>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Bonus remark:</mat-label>
+                <textarea name="remarks" rows="5" matInput [(ngModel)]="bonus.remark"></textarea>
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="button" (click)="goBack()">Go back</button>
+            <button mat-raised-button color="primary" type="button" (click)="save()">Save</button>
+        </form>
+    </mat-card>
+</div>

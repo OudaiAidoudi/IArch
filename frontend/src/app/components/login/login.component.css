@@ -1,11 +1,49 @@
-mat-form-field{
-  width: 100%;
+/* Base styles for mat-form-field to ensure responsiveness and consistency */
+mat-form-field {
+    width: 100%;
+    margin-bottom: 1rem; /* Adds spacing between form fields */
 }
 
-span.error{
-  color: red;
+/* Ensures the input inside mat-form-field looks clean and modern */
+mat-form-field .mat-input-element {
+    font-size: 1rem; /* Adjust font size for better readability */
+    padding: 0.5rem 0; /* Adds padding for better touch/click interaction */
 }
 
-button.login{
-  float: right;
+/* Styles for error messages to make them more noticeable and user-friendly */
+span.error {
+    color: #ff3d3d; /* A more vibrant red for better visibility */
+    font-size: 0.875rem; /* Smaller font size for error messages */
+    margin-top: 0.25rem; /* Adds space between the input and error message */
+    display: block; /* Ensures the error message appears on a new line */
+}
+
+/* Styles for the login button to make it more prominent and aligned */
+button.login {
+    float: right;
+    background-color: #3f51b5; /* A modern, primary color */
+    color: white; /* White text for better contrast */
+    padding: 0.75rem 1.5rem; /* Adds padding for a larger clickable area */
+    border: none; /* Removes default border */
+    border-radius: 4px; /* Rounded corners for a modern look */
+    font-size: 1rem; /* Adjust font size for better readability */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for the login button */
+button.login:hover {
+    background-color: #303f9f; /* Darker shade on hover for interactivity */
+}
+
+/* Focus effect for the login button */
+button.login:focus {
+    outline: none; /* Removes default outline */
+    box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.3); /* Adds a subtle focus ring */
+}
+
+/* Optional: Add a disabled state for the button */
+button.login:disabled {
+    background-color: #9fa8da; /* Lighter color for disabled state */
+    cursor: not-allowed; /* Changes cursor to indicate disabled state */
 }

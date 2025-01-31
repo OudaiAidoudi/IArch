@@ -1,0 +1,71 @@
+/* Card styling */
+.profile-card {
+    max-width: 450px;
+    margin: 20px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Header styling */
+.profile-header {
+    background: linear-gradient(135deg, #3f51b5, #2196f3);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.profile-avatar {
+    background-image: url('../../../assets/User_Icon.png');
+    background-size: cover;
+    width: 60px;
+    height: 60px;
+    border: 2px solid white;
+}
+
+.profile-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.profile-subtitle {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Content styling */
+.profile-content {
+    padding: 20px;
+}
+
+.profile-list {
+    padding: 0;
+}
+
+.profile-list-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.profile-list-item:last-child {
+    border-bottom: none;
+}
+
+.profile-list-item mat-icon {
+    color: #3f51b5;
+    margin-right: 10px;
+}
+
+.profile-list-item .label {
+    font-weight: 500;
+    color: #555;
+    margin-right: 8px;
+}
+
+.profile-list-item .value {
+    color: #333;
+    font-weight: 400;
+}

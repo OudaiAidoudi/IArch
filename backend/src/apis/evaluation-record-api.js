@@ -62,7 +62,7 @@ exports.addEvaluationRecord = (req, res) => {
 exports.updateEvaluationRecordById = (req, res) => {
     const db = req.app.get('db');
 
-    evaluationService.updateById(db, ObjectId(req.params._id), req.body)
+    evaluationService.updateById(db, new ObjectId(req.params._id), req.body)
         .then(evaluationRecord => {
             res.send(evaluationRecord);
         }).catch((e) => {
@@ -75,7 +75,7 @@ exports.updateEvaluationRecordById = (req, res) => {
 exports.deleteEvaluationRecord = (req, res) => {
     const db = req.app.get('db');
 
-   evaluationService.delete(db, ObjectId(req.params._id))
+   evaluationService.delete(db, new ObjectId(req.params._id))
         .then(_id => {
             res.send(_id.toString());
         }).catch(() => {

@@ -14,7 +14,7 @@ exports.getBonuses = (req, res) => {
 exports.getBonusById = (req, res) => {
     const db = req.app.get('db');
 
-    bonusService.getBonusById(db, ObjectId(req.params._id))
+    bonusService.getBonusById(db, new ObjectId(req.params._id))
         .then((bonusById) => {
             // Check if this Object belongs to the asking salesman
             if (req.checkID && bonusById.salesManID != req.session.user._id) {
@@ -54,7 +54,7 @@ exports.addBonus = (req, res) => {
 exports.updateBonusById = (req, res) => {
     const db = req.app.get('db');
 
-    bonusService.update(db, ObjectId(req.params._id), req.body)
+    bonusService.update(db, new ObjectId(req.params._id), req.body)
         .then((bonus) => {
             res.send(bonus);
         }).catch((e) => {
@@ -67,7 +67,7 @@ exports.updateBonusById = (req, res) => {
 exports.deleteBonus = (req, res) => {
     const db = req.app.get('db');
 
-    bonusService.delete(db, ObjectId(req.params._id))
+    bonusService.delete(db, new ObjectId(req.params._id))
         .then(_id => {
             res.send(_id.toString());
         }).catch((e) => {

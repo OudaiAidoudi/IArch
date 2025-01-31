@@ -1,0 +1,42 @@
+/* Styling the year input field */
+input#year {
+    width: 250px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #007bff;
+    border-radius: 6px;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+    background-color: #ffffff;
+}
+
+input#year:focus {
+    border-color: #0056b3;
+    background-color: #f0f8ff;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+}
+
+/* Styling the Calculate Bonuses button */
+button.calculate-bonuses {
+    width: auto;
+    min-width: 180px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+button.calculate-bonuses:hover {
+    background: linear-gradient(135deg, #0056b3, #0046a1);
+    transform: scale(1.05);
+}
+
+button.calculate-bonuses:disabled {
+    background-color: #b3c6ff !important;
+    cursor: not-allowed !important;
+}

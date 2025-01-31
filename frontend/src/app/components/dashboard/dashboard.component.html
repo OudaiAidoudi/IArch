@@ -1,0 +1,43 @@
+<mat-card class="profile-card">
+    <mat-card-header class="profile-header">
+        <div mat-card-avatar class="profile-avatar"></div>
+        <mat-card-title class="profile-title">{{currentUser?.username}}</mat-card-title>
+        <mat-card-subtitle class="profile-subtitle" *ngIf="currentUser?.isAdmin">Admin</mat-card-subtitle>
+        <mat-card-subtitle class="profile-subtitle" *ngIf="!currentUser?.isAdmin">Employee</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="profile-content">
+        <mat-list class="profile-list">
+            <mat-list-item class="profile-list-item">
+                <mat-icon>person</mat-icon>
+                <span class="label">User ID:</span>
+                <span class="value">{{currentUser?._id}}</span>
+            </mat-list-item>
+            <mat-list-item class="profile-list-item">
+                <mat-icon>badge</mat-icon>
+                <span class="label">Username:</span>
+                <span class="value">{{currentUser?.username}}</span>
+            </mat-list-item>
+            <mat-list-item class="profile-list-item">
+                <mat-icon>person_outline</mat-icon>
+                <span class="label">First Name:</span>
+                <span class="value">{{currentUser?.firstname}}</span>
+            </mat-list-item>
+            <mat-list-item class="profile-list-item">
+                <mat-icon>person_outline</mat-icon>
+                <span class="label">Last Name:</span>
+                <span class="value">{{currentUser?.lastname}}</span>
+            </mat-list-item>
+            <mat-list-item class="profile-list-item">
+                <mat-icon>email</mat-icon>
+                <span class="label">Email:</span>
+                <span class="value">{{currentUser?.email}}</span>
+            </mat-list-item>
+            <mat-list-item class="profile-list-item">
+                <mat-icon>security</mat-icon>
+                <span class="label">Role:</span>
+                <span class="value">{{currentUser?.isAdmin ? 'Admin' : 'Employee'}}</span>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+</mat-card>

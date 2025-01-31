@@ -1,0 +1,78 @@
+<h2>Evaluation Records</h2>
+<button class="btn btn-lg btn-primary" (click)="open(mymodal, null)">Add New Evaluation Record</button>
+<br><br>
+
+<ng-template #mymodal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Add New Evaluation Record</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form class="example-form" #form="ngForm">
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Salesman</mat-label>
+                <mat-select [compareWith]="compareSalesMen" [(ngModel)]="evaluationrecord.salesMan" name="salesMan" required>
+                    <mat-option *ngFor="let salesMan of salesMenArray" [value]="salesMan">
+                        {{salesMan.fullName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Year</mat-label>
+                <input name="year" matInput placeholder="Year" [(ngModel)]="evaluationrecord.year" required>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Goal</mat-label>
+                <mat-select [(ngModel)]="evaluationrecord.goalDescription" required>
+                    <mat-option *ngFor="let goal of goals" [value]="goal.goalDescription">{{goal.goalDescription}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Target Value</mat-label>
+                <input name="targetValue" matInput placeholder="Target Value" [(ngModel)]="evaluationrecord.targetValue" required>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Actual Value</mat-label>
+                <input name="actualValue" matInput placeholder="Actual Value" [(ngModel)]="evaluationrecord.actualValue" required>
+            </mat-form-field>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save')">Save</button>
+    </div>
+</ng-template>
+
+<table mat-table class="mat-elevation-z8 cdk-table" [dataSource]="evaluationrecords">
+    <ng-container matColumnDef="salesMan">
+        <th mat-header-cell *matHeaderCellDef>Salesman</th>
+        <td mat-cell *matCellDef="let evaluation">{{evaluation.salesMan.fullName}}</td>
+    </ng-container>
+    <ng-container matColumnDef="year">
+        <th mat-header-cell *matHeaderCellDef>Year</th>
+        <td mat-cell *matCellDef="let evaluation">{{evaluation.year}}</td>
+    </ng-container>
+    <ng-container matColumnDef="goal">
+        <th mat-header-cell *matHeaderCellDef>Goal</th>
+        <td mat-cell *matCellDef="let evaluation">{{evaluation.goalDescription}}</td>
+    </ng-container>
+    <ng-container matColumnDef="targetValue">
+        <th mat-header-cell *matHeaderCellDef>Target Value</th>
+        <td mat-cell *matCellDef="let evaluation">{{evaluation.targetValue}}</td>
+    </ng-container>
+    <ng-container matColumnDef="actualValue">
+        <th mat-header-cell *matHeaderCellDef>Actual Value</th>
+        <td mat-cell *matCellDef="let evaluation">{{evaluation.actualValue}}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let row">
+            <button mat-button (click)="open(mymodal, row)" class="btn-edit">Update</button>
+            <button mat-button (click)="deleteMethod(row)" class="btn-delete">Delete</button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
